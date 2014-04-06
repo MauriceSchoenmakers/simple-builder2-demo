@@ -5,7 +5,7 @@
 var path = require('path');
 var mkdir = require('mkdirp');
 var Builder = require('component-builder2');
-var Resolver = require('component-resolver');
+var resolve = require('component-resolver');
 var myth = require('builder-myth');
 var debug = require('debug')('simple-builder2:builder');
 
@@ -26,14 +26,13 @@ module.exports = function(params){
   var copy = params.copy;
 
   return function*(){
-    
-    var resolver = new Resolver(process.cwd(), { install: true });
-    var tree = yield* resolver.tree();
+
+    var tree = yield* resolve(process.cwd(), { install: true });
     var out = params.out;
 
     if(!params.bundled){
       debug('Building component to %s', out);
-      yield buildBundle(resolver, tree, out);
+      yield buildBundle(resolve, tree, out);
     } else {
       for(var bundle in tree.locals){
         debug('Building a bundle: %s', bundle);
@@ -43,17 +42,15 @@ module.exports = function(params){
     }
   };
 
-  function* buildBundle(resolver, tree, out){
-
+  function* buildBundle(resolve, tree, out){
     // mkdir -p
     mkdir.sync(out);
 
-    var nodes = resolver.flatten(tree); 
+    var nodes = resolve.flatten(tree);
 
     /**
      * Builders
      */
-
     var script = new Builder.scripts(nodes);
     var style = new Builder.styles(nodes);
     var file = new Builder.files(nodes, {dest: out});
@@ -74,7 +71,6 @@ module.exports = function(params){
     style.use('styles', Builder.plugins.css());
     style.use('styles', myth({whitespace: false}));
     style.use('styles', Builder.plugins.urlRewriter());
-    
     /**
      * File Plugins
      */

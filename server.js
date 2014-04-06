@@ -4,7 +4,7 @@ var port = process.env.PORT || 3000;
 var serve = require('koa-static');
 var mount = require('koa-mount');
 var build = require('./');
-var params = { params: 'build', copy: true };
+var params = { out: 'build', copy: true };
 
 app.use(function*(next){
   if(/build\.(js|css)/.test(this.url)){
