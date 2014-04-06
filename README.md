@@ -11,7 +11,7 @@ To build the sample.
 Or to run the minimal `koa` server that builds component for every request.
 
 ```
-  $ node server
+  $ node --harmony server
 ```
 
 
