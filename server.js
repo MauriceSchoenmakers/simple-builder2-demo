@@ -6,6 +6,7 @@ var mount = require('koa-mount');
 var build = require('./');
 var params = { out: 'build', copy: true };
 
+
 app.use(function*(next){
   if(/build\.(js|css)/.test(this.url)){
     yield build(params);

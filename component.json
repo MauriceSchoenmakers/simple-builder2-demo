@@ -1,12 +1,14 @@
 {
   "name": "simple-builder2-demo",
   "dependencies": {
-    "visionmedia/debug": "0.7.4"
+    "visionmedia/debug": "0.7.4",
+	"npm/cycle": "1.0.3"
   },
   "locals": [
     "demo"
   ],
   "paths": [
     "lib"
-  ]
+  ],
+  "remotes" : [ "npm", "github" ]
 }

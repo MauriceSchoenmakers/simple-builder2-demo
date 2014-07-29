@@ -17,6 +17,7 @@
     "builder-myth": "git://github.com/mnmly/builder-myth",
     "koa-mount": "~1.2.3",
     "koa-static": "~1.4.2",
-    "koa": "~0.3.0"
+    "koa": "~0.3.0",
+    "remotes" : "~1.1.2"
   }
 }
